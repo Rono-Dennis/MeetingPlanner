@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+
+<nav th:replace="fragments/header :: nav"></nav>
+
+<div id="admin-section">
+    <div class="admin-inner">
+        <div class="container">
+            <div class="d-flex flex-row">
+
+                <!--Admin sidebar-->
+                <div th:replace="fragments/adminSidebar :: admin-sidebar"></div>
+
+                <!--Admin content-->
+                <div id="admin-content">
+                    <div class="row mb-2">
+                        <div class="col-lg-9 d-flex flex-wrap align-content-start">
+                            <!--Search user-->
+                            <div class="row col-lg-12 d-flex flex-nowrap pb-2">
+                                <div class="input-group">
+                                    <select class="custom-select" id="search-user-dropdown" onchange="saveSearchParameters(this);">
+                                        <option value="ID">ID</option>
+                                        <option value="Name">Name</option>
+                                        <option value="Surname">Surname</option>
+                                        <option value="Email">Email</option>
+                                    </select>
+                                    <input type="text" id="searchUserBar"
+                                           onkeyup='saveSearchParameters(this);'
+                                           placeholder="Search for users.." class="form-control"
+                                           aria-label="Text input with dropdown button">
+                                </div>
+                                <button type="button" class="btn btn-secondary ml-2" onclick="searchUserByProperty()">Search</button>
+                            </div>
+
+                            <div class="row col-lg-12">
+                                <!--Table with users-->
+                                <table class="table table-striped table-responsive" id="user-table">
+                                    <thead class="thead">
+                                    <tr>
+                                        <th onclick="sortTable(0)">ID</th>
+                                        <th onclick="sortTable(1)">Name</th>
+                                        <th onclick="sortTable(2)">Surname</th>
+                                        <th onclick="sortTable(3)">Username</th>
+                                        <th onclick="sortTable(4)">Email</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="user-table-body">
+                                    <tr th:each="user : ${users}">
+                                        <td th:text="${user.id}"></td>
+                                        <td th:text="${user.name}"></td>
+                                        <td th:text="${user.surname}"></td>
+                                        <td th:text="${user.username}"></td>
+                                        <td th:text="${user.email}"></td>
+                                        <td th:switch="${user.enabled}">
+                                            <span th:case="true" style="color:green">Enabled</span>
+                                            <span th:case="false" style="color:red">Disabled</span>
+                                        </td>
+
+                                        <!--Edit user button-->
+                                        <td><a style="text-decoration: none; color:blue"
+                                               th:href="@{/adminPage/users/{id}(id=${user.id})}"
+                                               class="editBtn" data-toggle="tooltip"
+                                               data-placement="right" title="Edit user">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        </td>
+
+                                        <!--Remove user button-->
+                                        <td>
+                                            <a id="remove-link" style="text-decoration: none; color:red"
+                                               data-toggle='modal' data-target='#deleteModal'
+                                               data-placement="right" title="Remove user"
+                                               th:onclick="'setRowIndexAndUserId(this, ' + ${user.id} + ')'">
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div th:replace="fragments/deleteUserModal :: delete-user-modal"></div>
+                        </div>
+
+                        <div class="col-lg-3 pl-0">
+                            <!--Delete success message-->
+                            <div id="alert-messages"></div>
+
+                            <!--Save success message-->
+                            <div th:if="${userHasBeenSaved}" class="alert alert-success alert-dismissible fade show"
+                                 role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <strong>Well done!</strong> User has been saved!!!
+                            </div>
+
+                            <!--Update success message-->
+                            <div th:if="${userHasBeenUpdated}" class="alert alert-success alert-dismissible fade show"
+                                 role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <strong>Well done!</strong> User has been updated!!!
+                            </div>
+
+                            <!--Number format exception message-->
+                            <div th:if="${numberFormatException}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                Please enter a valid number
+                            </div>
+
+                            <!--No matches found message-->
+                            <div th:if="${noMatches}" class='alert alert-info alert-dismissible fade show' role='alert'>
+                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                                    Sorry, no matches found for <span th:text="${usersProperty}"></span> = <span th:text="${propertyValue}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#" th:href="@{/adminPage/users/newUser}">
+                        <button type="button" class="btn btn-primary">New User</button>
+                    </a>
+
+                    <!--Paging-->
+                    <div id="paging-section" class="row" style="margin-top: 10px;">
+
+                        <!--Page size dropdown-->
+                        <div class="form-group col-md-1" th:if="${users.totalPages != 0}">
+
+                            <!--Get pageSizesToShow-->
+                            <div hidden id="pageSizesToShow" th:attr="data-pageSizesToShow = ${pager.pageSizesToShowInJSON}"></div>
+
+                            <select class="form-control pagination" id="pageSizeSelect">
+                                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
+                                        th:selected="${pageSize} == ${selectedPageSize}"></option>
+                            </select>
+                        </div>
+
+                        <!--Pages-->
+                        <nav aria-label="Page navigation example" class="form-group col-md-11 pagination-centered">
+                            <ul class="pagination" th:if="${users.totalPages != 0}">
+                                <li th:class="${users.number == 0} ? 'page-item disabled'" class="page-item">
+                                    <a th:if="${not #strings.isEmpty(propertyValue)}"
+                                       class="page-link"
+                                       th:href="@{/adminPage/users(usersProperty=${usersProperty},
+                                       propertyValue=${propertyValue}, pageSize=${selectedPageSize}, page=1)}">
+                                        &laquo;
+                                    </a>
+
+                                    <a th:if="${#strings.isEmpty(propertyValue)}"
+                                       class="page-link"
+                                       th:href="@{/adminPage/users(pageSize=${selectedPageSize}, page=1)}">
+                                        &laquo;
+                                    </a>
+                                </li>
+                                <li th:class="${users.number == 0} ? 'page-item disabled'" class="page-item">
+                                    <a th:if="${not #strings.isEmpty(propertyValue) }"
+                                       class="page-link"
+                                       th:href="@{/adminPage/users(usersProperty=${usersProperty},
+                                       propertyValue=${propertyValue}, pageSize=${selectedPageSize}, page=${users.number})}">
+                                        &larr;
+                                    </a>
+
+                                    <a th:if="${#strings.isEmpty(propertyValue)}"
+                                       class="page-link"
+                                       th:href="@{/adminPage/users(pageSize=${selectedPageSize}, page=${users.number})}">
+                                        &larr;
+                                    </a>
+                                </li>
+                                <li th:class="${users.number == (page - 1)} ? 'active pointer-disabled'" class="page-item"
+                                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                                    <a th:if="${not #strings.isEmpty(propertyValue)}"
+                                       class="page-link"
+                                       th:href="@{/adminPage/users(usersProperty=${usersProperty},
+                                       propertyValue=${propertyValue}, pageSize=${selectedPageSize}, page=${page})}"
+                                       th:text="${page}">
+                                    </a>
+                                    <a th:if="${#strings.isEmpty(propertyValue)}"
+                                       class="page-link"
+                                       th:href="@{/adminPage/users(pageSize=${selectedPageSize}, page=${page})}"
+                                       th:text="${page}">
+                                    </a>
+                                </li>
+                                <li th:class="${users.number + 1 == users.totalPages} ? 'page-item disabled'" class="page-item">
+                                    <a th:if="${not #strings.isEmpty(propertyValue)}"
+                                       class="page-link"
+                                       th:href="@{/adminPage/users(usersProperty=${usersProperty},
+                                       propertyValue=${propertyValue}, pageSize=${selectedPageSize}, page=${users.number + 2})}">
+                                        &rarr;
+                                    </a>
+                                    <a th:if="${#strings.isEmpty(propertyValue)}"
+                                       class="page-link"
+                                       th:href="@{/adminPage/users(pageSize=${selectedPageSize}, page=${users.number + 2})}">
+                                        &rarr;
+                                    </a>
+                                </li>
+                                <li th:class="${users.number + 1 == users.totalPages} ? 'page-item disabled'" class="page-item">
+                                    <a th:if="${not #strings.isEmpty(propertyValue) }"
+                                       class="page-link"
+                                       th:href="@{/adminPage/users(usersProperty=${usersProperty}, propertyValue=${propertyValue},
+                                       pageSize=${selectedPageSize}, page=${users.totalPages})}">
+                                        &raquo;
+                                    </a>
+                                    <a th:if="${#strings.isEmpty(propertyValue)}"
+                                       class="page-link"
+                                       th:href="@{/adminPage/users(pageSize=${selectedPageSize}, page=${users.totalPages})}">
+                                        &raquo;
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+
+<div th:replace="fragments/jsScripts :: scripts"></div>
+
+
+</body>
+</html>

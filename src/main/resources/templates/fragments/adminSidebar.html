@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+<div th:fragment="admin-sidebar" id="admin-sidebar" >
+    <aside id="admin-nav">
+        <nav class="navbar navbar-dark bg-dark">
+            <ul class="navbar-nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/adminPage/users}" href="/adminPage/users">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/adminPage/roles}" href="/adminPage/roles">Roles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#!">Topics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#!">Rooms</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+</div>
+</body>
+</html>

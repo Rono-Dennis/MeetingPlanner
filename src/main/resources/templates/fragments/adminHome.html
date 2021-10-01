@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container-fluid p-5" >
+    <h1 class="display-4 mb-4">Free Courses</h1>
+    <div class="card-deck mx-5">
+
+        <!--		<div class="card" style="width: 18rem; height: 15rem;">-->
+        <!--			<img class="card-img-top" src="/images/pathToYourImage.png" alt="">-->
+        <!--			<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+        <!--			<div class="card-body"> Add Meeting </div>-->
+        <!--		</div></a>-->
+        <div class="card bg-dark text-white" style="width: 18rem; height: 15rem;">
+            <img src="..." class="card-img" alt="">
+            <div class="card-img-overlay">
+                <h5 class="card-title">Add Meeting</h5>
+                <p class="card-text">Add Room, Topic, Start time/date and time/date.</p>
+                <a th:href="@{/meeting_form}"><p class="card-text">Add Meeting</p></a>
+            </div>
+        </div>
+        <div class="card bg-dark text-white" style="width: 18rem; height: 15rem;">
+            <img src="..." class="card-img" alt="">
+            <div class="card-img-overlay">
+                <h5 class="card-title">Add Meeting</h5>
+                <p class="card-text">Add Room, Topic, Start time/date and time/date.</p>
+                <a th:href="@{/meetingdetails}"><p class="card-text">View Meeting details</p></a>
+
+            </div>
+        </div>
+        <div class="card bg-dark text-white" style="width: 18rem; height: 15rem;">
+            <img src="..." class="card-img" alt="">
+            <div class="card-img-overlay">
+                <h5 class="card-title">Add Meeting</h5>
+                <p class="card-text">Add Room, Topic, Start time/date and time/date.</p>
+                <a th:href="@{/meetingdetails}"><p class="card-text">View Meeting details</p></a>
+            </div>
+        </div>
+        <div class="card bg-dark text-white" style="width: 18rem; height: 15rem;">
+            <img src="..." class="card-img" alt="">
+            <div class="card-img-overlay">
+                <h5 class="card-title">View Meeting details</h5>
+                <p class="card-text">Add Room, Topic, Start time/date and time/date.</p>
+                <a th:href="@{/meetingdetails}"><p class="card-text">View Meeting details</p></a>
+            </div>
+        </div>
+        <div class="card bg-dark text-white" style="width: 18rem; height: 15rem;">
+            <img src="..." class="card-img" alt="">
+            <div class="card-img-overlay">
+                <h5 class="card-title">Add Meeting</h5>
+                <p class="card-text">Add Room, Topic, Start time/date and time/date.</p>
+                <a th:href="@{/meetingdetails}"><p class="card-text">View Meeting details</p></a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container-fluid p-5" style="background:#EFDECD;">
+    <h1 class="display-4 mb-4">Paid Courses</h1>
+    <div class="card-deck mx-3">
+        <div class="card">
+            <img class="card-img-top" src="/images/pathToYourImage.png" alt="Card image cap">
+            <div class="card-body"> Some more card content </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="/images/pathToYourImage.png" alt="Card image cap">
+            <div class="card-body"> Some more card content </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="/images/pathToYourImage.png" alt="Card image cap">
+            <div class="card-body"> Some more card content </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="/images/pathToYourImage.png" alt="Card image cap">
+            <div class="card-body"> Some more card content </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

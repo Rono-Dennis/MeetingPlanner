@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <nav th:replace="fragments/header :: nav"></nav>
+</head>
+<body>
+
+<div class="top">
+    <div class="d-flex" id="wrapper" style="background-color: #baf3d7">
+
+<!---sidebar starts here-->
+
+<div class="bg-white"  style="background-color: #baf3d7; margin-top:3%">
+    <div class="collapse show" id="navbarSupportedContent" style="margin-left: 0;">
+        <!--		<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+
+        <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase">
+            <i class="fas fa-user-secret me-2"></i>MeetingPlanner
+        </div>
+
+        <div class="list-group list-group-flush my-3">
+            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active">
+                <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+            </a>
+            <a th:href="@{/meeting_form}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <i class="fas fa-project-diagram me-2"></i> Add Meeting
+            </a>
+            <a th:href="@{/meetingdetails}"  class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <i class="fas fa-project-diagram me-2"></i> View Meetings
+            </a>
+            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <i class="fas fa-paperclip me-2"></i> Reports
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <i class="fas fa-comment-dot me-2"></i> Chat
+            </a>
+            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <i class="fas fa-map-marker-alt me-2"></i>  Outlet
+            </a>
+            <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+                <i class="fas fa-project-diagram me-2"></i> Logout
+            </a>
+
+        </div>
+
+    </div>
+</div>
+<!--sidebar ends here-->
+
+<div id="page-content-wrapper" style="margin-top:3%">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+        <button class="navbar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <!--				<i class="fas fa-align-left primary-text fs-4 me-3"></i>-->
+            <!--				<span class="navbar-toggler-icon"></span>-->
+            <!--				<i class="fas fa-align-left"></i>-->
+            <span class="navbar-toggler-icon my-toggler"></span>
+        </button>
+        <div class="d-flex align-items-center">
+            <!--				<i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>-->
+            <h2 class="fs-2 m-0">Dashboard</h2>
+        </div>
+
+
+
+        <!--			<div th:replace="adminPage/adminprofile :: adminprofile"></div>-->
+
+        <!--			<div>-->
+        <!--				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">-->
+        <!--					<li class="nav-item-dropdown">-->
+        <!--						-->
+
+        <!--						-->
+
+        <!--					</li>-->
+        <!--				</ul>-->
+        <!--			</div>-->
+    </nav>
+
+
+
+
+
+
+
+
+    <!--<div class="container-fluid text-center">-->
+<!--    <div class="border border-secondary p-3 rounded">-->
+        <h1>Create Meeting</h1>
+        <!--/*@thymesVar id="meet" type=""*/-->
+        <form th:action="@{/meetingdetails}" method="post"  class="row g-3"
+              th:object="${meet}"  style="max-width: 600px; margin: 0 auto">
+
+
+
+            <div class="col-md-5">
+                <label class="form-label">Topic</label>
+                <input type="text" class="form-control" th:field="*{topic}" required>
+            </div>
+            <div class="col-md-5">
+                <label class="form-label">Capacity</label>
+                <input type="number" class="form-control" th:field="*{capacity}" required minlength="2" maxlength="20">
+
+            </div>
+
+            <div class="col-md-5">
+                <label class="form-label">meeting start time</label>
+                <input type="datetime" class="form-control" th:field="*{meeting_start_time}" required>
+                <input type="date" class="form-control" th:field="*{meeting_start_date}" required>
+
+            </div>
+
+            <div class="col-md-5">
+                <label class="form-label">meeting end time</label>
+                <input type="datetime" class="form-control"th:field="*{meeting_end_time}" required>
+                <input type="date" class="form-control" th:field="*{meeting_start_date}" required>
+
+            </div>
+            <div class="col-md-6" style="margin-top: 10px;">
+                <label for="inputState" class="form-label">Available Rooms</label>
+                <select  id="inputState" class="form-select col-md-8">
+                    <option selected>Choose...</option>
+                    <option value="T1 Room">T1 Room</option>
+                    <option value="T2 Room">T2 Room</option>
+                    <option value="P1 Room">P1 Room</option>
+                    <option value="P2 Room">P2 Room</option>
+                </select>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <label class="col-form-label col-4">EventPattern:</label><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <input type="radio" value="Once" class="form-check-input" name="eventPattern" id="Once" th:field="*{eventPattern}"/>Once &nbsp&nbsp
+                <input type="radio" value="Twice" class="form-check-input" name="eventPattern" id="Twice" th:field="*{eventPattern}"/>Twice &nbsp&nbsp
+                <input type="radio" value="More" class="form-check-input" name="eventPattern" id="More" th:field="*{eventPattern}"/>More
+            </div>
+
+
+            <div class="form-check form-check-inline">
+                <label class="col-form-label col-4">OrganisationName:</label><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <input type="radio" value="Tracom" class="form-check-input" name="organisationName" id="Tracom" th:field="*{organisationName}"/>Tracom &nbsp&nbsp
+                <input type="radio" value="Pergamon" class="form-check-input" name="organisationName" id="Pergamon" th:field="*{organisationName}"/>Pergamon &nbsp&nbsp
+
+            </div>
+
+            <!-- <div class="col-md-2">
+              <label for="inputZip" class="form-label">Zip</label>
+              <input type="text" class="form-control" id="inputZip">
+            </div>
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                  Check me out
+                </label>
+              </div>
+            </div> -->
+            <div class="col-10">
+                <button type="submit" class="btn btn-primary">Create Meeting</button>
+            </div>
+
+
+
+
+
+
+
+
+<!--            <div>-->
+<!--                <div class="mb-3">-->
+<!--                    <label class="form-label">Topic</label>-->
+
+<!--                        <input type="text" class="form-control" th:field="*{topic}" required>-->
+<!--                    </div>-->
+
+<!--                    <div class="mb-3">-->
+<!--                    <label class="form-label">meeting start time</label>-->
+
+<!--                        <input type="datetime" class="form-control" th:field="*{meeting_start_time}" required>-->
+<!--                        <input type="date" class="form-control" th:field="*{meeting_start_date}" required>-->
+
+<!--                </div>-->
+<!--                <div class="mb-3">-->
+<!--                    <label class="form-label">meeting end time</label>-->
+
+<!--                        <input type="datetime" class="form-control" th:field="*{meeting_end_time}" required>-->
+<!--                        <input type="date" class="form-control" th:field="*{meeting_end_date}" required>-->
+
+<!--                </div>-->
+
+<!--                <div class="form-check form-check-inline">-->
+<!--                    <label class="col-form-label col-4">EventPattern:</label><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-->
+<!--                    <input type="radio" value="Once" class="form-check-input" name="eventPattern" id="Once" th:field="*{eventPattern}"/>Once &nbsp&nbsp-->
+<!--                    <input type="radio" value="Twice" class="form-check-input" name="eventPattern" id="Twice" th:field="*{eventPattern}"/>Twice &nbsp&nbsp-->
+<!--                    <input type="radio" value="More" class="form-check-input" name="eventPattern" id="More" th:field="*{eventPattern}"/>More-->
+<!--                </div>-->
+
+
+
+<!--                <div class="mb-3">-->
+<!--                    <label class="form-label">Capacity</label>-->
+
+<!--                        <input type="number" class="form-control" th:field="*{capacity}" required minlength="2" maxlength="20">-->
+
+<!--                </div>-->
+
+<!--                <div class="form-check form-check-inline">-->
+<!--                    <label class="col-form-label col-4">OrganisationName:</label><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-->
+<!--                    <input type="radio" value="Tracom" class="form-check-input" name="organisationName" id="Tracom" th:field="*{organisationName}"/>Tracom &nbsp&nbsp-->
+<!--                    <input type="radio" value="Pergamon" class="form-check-input" name="organisationName" id="Pergamon" th:field="*{organisationName}"/>Pergamon &nbsp&nbsp-->
+
+<!--                </div><br>-->
+
+
+<!--                <div class="mb-3">-->
+<!--                    <label class="form-label">Available Rooms</label>-->
+
+<!--                    <select class="form-label" th:field="*{category}">-->
+<!--                        <option value="T1 Room">T1 Room</option>-->
+<!--                        <option value="T2 Room">T2 Room</option>-->
+<!--                        <option value="P1 Room">P1 Room</option>-->
+<!--                        <option value="P2 Room">P2 Room</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+
+
+<!--                <div class="form-group m-3">-->
+<!--                    <button type="submit" class="btn btn-primary">Create Meeting</button>-->
+<!--                </div>-->
+<!--                </div>-->
+        </form>
+<!--    </div>-->
+</div></div></div>
+<!--</div>-->
+
+
+<!-- Footer -->
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

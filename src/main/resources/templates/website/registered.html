@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head
+
+        th:replace="fragments/head :: head">
+</head>
+<script src="https://use.fontawesome.com/c0c323679c.js"></script>
+
+
+<body>
+
+<!-- Navigation bar -->
+<nav th:replace="fragments/header :: nav"></nav>
+
+<div class="container">
+    <!-- Jubotron -->
+    <div class="jumbotron mx-auto mt-2" style="width: 65%; height: 400px;">
+        <h4 class="display-5">Hello, User!</h4>
+        <p th:text="${confirmationMessage}" class="lead">You have been registered successfully.</p>
+        <hr class="my-4">
+        <p class="lead">
+             <a class="btn btn-primary btn-lg" href="#" role="button"  th:href="@{/login}">Login</a>
+        </p>
+    </div>
+</div>
+
+<aside></aside>
+
+<!-- Footer -->
+<footer th:replace="fragments/footer :: footer"></footer>
+
+<div th:replace="fragments/jsScripts :: scripts"></div>
+
+</body>
+</html>

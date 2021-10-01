@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<script src="https://use.fontawesome.com/c0c323679c.js"></script>
+
+<link rel="stylesheet" href="css/stylee.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<nav th:replace="fragments/header :: nav"></nav>
+</head>
+<body style="background:#F2F0E6;">
+
+<div class="top">
+<div class="d-flex" id="wrapper" style="background-color: #baf3d7">
+
+	<!---sidebar starts here-->
+
+<div class="bg-white"  style="background-color: #baf3d7; margin-top:3%">
+	<div class="collapse show" id="navbarSupportedContent" style="margin-left: 0;">
+<!--		<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+
+		<div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase">
+			<i class="fas fa-user-secret me-2"></i>MeetingPlanner
+		</div>
+
+		<div class="list-group list-group-flush my-3">
+			<a href="#" class="list-group-item list-group-item-action bg-transparent second-text active">
+		      <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+			</a>
+			<a th:href="@{/meeting_form}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+				<i class="fas fa-project-diagram me-2"></i> Add Meeting
+			</a>
+			<a th:href="@{/meetingdetails}"  class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+				<i class="fas fa-project-diagram me-2"></i> View Meetings
+			</a>
+			<a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+			<i class="fas fa-paperclip me-2"></i> Reports
+		</a>
+
+			<a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+			<i class="fas fa-comment-dot me-2"></i> Chat
+		</a>
+			<a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+			<i class="fas fa-map-marker-alt me-2"></i>  Outlet
+		</a>
+			<a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+			<i class="fas fa-project-diagram me-2"></i> Logout
+		</a>
+
+		</div>
+
+	</div>
+</div>
+	<!--sidebar ends here-->
+
+	<div id="page-content-wrapper" style="margin-top:3%">
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+			<button class="navbar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<!--				<i class="fas fa-align-left primary-text fs-4 me-3"></i>-->
+<!--				<span class="navbar-toggler-icon"></span>-->
+<!--				<i class="fas fa-align-left"></i>-->
+				<span class="navbar-toggler-icon my-toggler"></span>
+			</button>
+			<div class="d-flex align-items-center">
+<!--				<i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>-->
+				<h2 class="fs-2 m-0">Dashboard</h2>
+			</div>
+
+
+
+<!--			<div th:replace="adminPage/adminprofile :: adminprofile"></div>-->
+
+<!--			<div>-->
+<!--				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">-->
+<!--					<li class="nav-item-dropdown">-->
+<!--						-->
+
+<!--						-->
+
+<!--					</li>-->
+<!--				</ul>-->
+<!--			</div>-->
+		</nav>
+
+
+
+
+
+
+		<div class="container-fluid p-4" >
+<!--			<h1 class="display-4 mb-4">Dashboard</h1>-->
+			<div class="card-deck mx-5">
+
+				<!--		<div class="card" style="width: 18rem; height: 15rem;">-->
+				<!--			<img class="card-img-top" src="/images/pathToYourImage.png" alt="">-->
+				<!--			<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+				<!--			<div class="card-body"> Add Meeting </div>-->
+				<!--		</div></a>-->
+				<div class="card bg-dark text-white" style="width: 18rem; height: 15rem;">
+					<img src="..." class="card-img" alt="">
+					<div class="card-img-overlay">
+						<h5 class="card-title">Add Meeting</h5>
+						<p class="card-text">Add Room, Topic, Start time/date and time/date.</p>
+						<a th:href="@{/meeting_form}"><p class="card-text">Add Meeting</p></a>
+					</div>
+				</div>
+				<div class="card bg-dark text-white" style="width: 18rem; height: 15rem;">
+					<img src="..." class="card-img" alt="">
+					<div class="card-img-overlay">
+						<h5 class="card-title">Add Meeting</h5>
+						<p class="card-text">Add Room, Topic, Start time/date and time/date.</p>
+						<a th:href="@{/meeting_form}"><p class="card-text">Add Meeting</p></a>
+					</div>
+				</div>
+				<div class="card bg-dark text-white" style="width: 18rem; height: 15rem;">
+					<img src="..." class="card-img" alt="">
+					<div class="card-img-overlay">
+						<h5 class="card-title">Add Meeting</h5>
+						<p class="card-text">Add Room, Topic, Start time/date and time/date.</p>
+						<a th:href="@{/meeting_form}"><p class="card-text">Add Meeting</p></a>
+					</div>
+				</div>
+				<div class="card bg-dark text-white" style="width: 18rem; height: 15rem;">
+					<img src="..." class="card-img" alt="">
+					<div class="card-img-overlay">
+						<h5 class="card-title">Add Meeting</h5>
+						<p class="card-text">Add Room, Topic, Start time/date and time/date.</p>
+						<a th:href="@{/meeting_form}"><p class="card-text">Add Meeting</p></a>
+					</div>
+				</div>
+				<div class="card bg-dark text-white" style="width: 18rem; height: 15rem;">
+					<img src="..." class="card-img" alt="">
+					<div class="card-img-overlay">
+						<h5 class="card-title">Add Meeting</h5>
+						<p class="card-text">Add Room, Topic, Start time/date and time/date.</p>
+						<a th:href="@{/meeting_form}"><p class="card-text">Add Meeting</p></a>
+					</div>
+				</div>
+				<!--		<div class="card">-->
+				<!--			<img class="card-img-top" src="/images/pathToYourImage.png" alt="Card image cap">-->
+				<!--			<div class="card-body"> Some more card content </div>-->
+				<!--		</div>-->
+				<!--		<div class="card">-->
+				<!--			<img class="card-img-top" src="/images/pathToYourImage.png" alt="Card image cap">-->
+				<!--			<div class="card-body"> Some more card content </div>-->
+				<!--		</div>-->
+				<!--		<div class="card">-->
+				<!--			<img class="card-img-top" src="/images/pathToYourImage.png" alt="Card image cap">-->
+				<!--			<div class="card-body"> Some more card content </div>-->
+				<!--		</div>-->
+			</div>
+		</div>
+
+		<div class="container-fluid p-5" style="background:#EFDECD;">
+			<h1 class="display-4 mb-4">Other roles</h1>
+			<div class="card-deck mx-3">
+				<div class="card">
+					<img class="card-img-top" src="/images/pathToYourImage.png" alt="Card image cap">
+					<div class="card-body"> Some more card content </div>
+				</div>
+				<div class="card">
+					<img class="card-img-top" src="/images/pathToYourImage.png" alt="Card image cap">
+					<div class="card-body"> Some more card content </div>
+				</div>
+				<div class="card">
+					<img class="card-img-top" src="/images/pathToYourImage.png" alt="Card image cap">
+					<div class="card-body"> Some more card content </div>
+				</div>
+				<div class="card">
+					<img class="card-img-top" src="/images/pathToYourImage.png" alt="Card image cap">
+					<div class="card-body"> Some more card content </div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+
+
+		<!-- Footer -->
+		<footer th:replace="fragments/footer :: footer"></footer>
+
+
+		<div th:replace="fragments/jsScripts :: scripts"></div>
+
+
+
+
+
+	</div>
+
+
+</div>
+
+
+
+<!--<nav th:replace="fragments/header :: nav"></nav>-->
+
+<!--&lt;!&ndash; HOME SECTION &ndash;&gt;-->
+<!--<header id="home-section">-->
+<!--	<div class="dark-overlay">-->
+<!--		<div class="home-inner">-->
+<!--			<div class="container">-->
+<!--				<div class="row">-->
+<!--					<div class="col-lg-8 d-none d-lg-block">-->
+
+<!--					</div>-->
+<!--					<div class="col-lg-4">-->
+
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--</header>-->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+<script>
+
+	var el = document.getElementById("wrapper")
+	var toggleButton = document.getElementById("menu-toggle")
+
+	toggleButton.onclick = function ()
+	{
+		el.classList.toggle("toggle")
+	}
+</script>
+
+</body>
+</html>
